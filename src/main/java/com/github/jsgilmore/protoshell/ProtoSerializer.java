@@ -109,12 +109,17 @@ public class ProtoSerializer implements ISerializer {
 	}
 
 	public void writeBoltMsg(BoltMsg boltMsg) throws IOException {
-		ShellMessages.BoltMsgMeta meta = ShellMessages.BoltMsgMeta.newBuilder()
+		ShellMessages.BoltMsgMeta.Builder builder = ShellMessages.BoltMsgMeta.newBuilder()
     			.setId(boltMsg.getId())
-    			.setComp(boltMsg.getComp())
     			.setStream(boltMsg.getStream())
-    			.setTask(boltMsg.getTask())
-    			.build();
+    			.setTask(boltMsg.getTask());
+
+    if (boltMsg.getComp() != null) {
+      builder.setComp(boltMsg.getComp());
+    }
+
+    ShellMessages.BoltMsgMeta meta = builder.build();
+
     	ShellMessages.BoltMsgProto.Builder tupleBuilder = ShellMessages.BoltMsgProto.newBuilder()
     			.setBoltMsgMeta(meta);
     	for (Object object: boltMsg.getTuple()) {
