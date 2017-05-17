@@ -14,7 +14,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import backtype.storm.multilang.NoOutputException;
+import org.apache.storm.multilang.NoOutputException;
 
 public class ProtoSerializerTest {
     ProtoSerializer serializer;
